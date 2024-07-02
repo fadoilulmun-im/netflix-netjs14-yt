@@ -6,6 +6,8 @@ import GoogleSignInButton from "@/app/components/GoogleSignInButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/utils/auth";
 import { redirect } from "next/navigation";
+import EmailSignInButton from "@/app/components/EmailSignInButton";
+import SignInForm from "./form";
 
 export default async function SignInPage() {
   const session = await getServerSession(authOptions);
@@ -14,25 +16,9 @@ export default async function SignInPage() {
   }
 
   return (
-    <div className="m-24 rounded bg-black/80 py-10 px-6 md:mt-0 md:max-w-sm md:px-14">
-      <form method="post" action="/api/auth/signin">
-        <h1 className="text-3xl font-semibold text-white">Sign In</h1>
-        <div className="space-y-4 mt-5">
-          <Input
-            type="email"
-            name="Email"
-            placeholder="Email"
-            className="bg-[#333] placeholder:text-xs placeholder:text-gray-400 w-full inline-block"
-          />
-          <Button
-            type="submit"
-            variant="destructive"
-            className="w-full bg-[#e50914]"
-          >
-            Sign In
-          </Button>
-        </div>
-      </form>
+    <div className="mx-8 my-12 rounded bg-black/80 py-10 px-6 md:max-w-sm md:px-14">
+      <h1 className="text-3xl font-semibold text-white">Sign In</h1>
+      <SignInForm />
 
       <div className="text-gray-500 text-sm mt-2">
         New to Netflix?{" "}
@@ -44,6 +30,7 @@ export default async function SignInPage() {
       <div className="flex w-full justify-center items-center gap-x-3 mt-6">
         <GithubSignInButton />
         <GoogleSignInButton />
+        {/* <EmailSignInButton /> */}
       </div>
     </div>
   );
